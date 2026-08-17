@@ -13,7 +13,7 @@ import arrowFromRtoL from '../assets/arrowfromRtoL.svg';
 import maskCircle from '../assets/mask.svg';
 import cityImg from '../assets/city.svg';
 import arrowLtoR from '../assets/arrowLtoR.svg';
-import mask1Circle from '../assets/mask1.svg';
+import mask1Circle from '../assets/Mask1.svg';
 import bitmapImg from '../assets/bitmap.svg';
 import arrowRtoL from '../assets/arrow-RtoL.svg';
 import mask2Circle from '../assets/mask2.svg';
