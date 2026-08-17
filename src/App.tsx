@@ -20,10 +20,10 @@ export default function App() {
     <Router>
       <div className="min-h-screen bg-white font-['Lexend_Deca'] overflow-x-hidden flex flex-col">
         
-        {/* === HEADER === */}
+
         <header className="relative flex items-center justify-between px-6 py-6 md:px-10 lg:px-24 max-w-360 mx-auto bg-white w-full">
           
-          {/* მობილური ჰამბურგერ მენიუს ღილაკი */}
+
           <button 
             onClick={() => setIsMenuOpen(!isMenuOpen)} 
             className="md:hidden w-6 h-6 flex flex-col justify-center gap-[5px] cursor-pointer z-[60]"
@@ -39,12 +39,9 @@ export default function App() {
             )}
           </button>
 
-          {/* ლოგო (ცენტრში მობაილზე) */}
           <Link to="/" className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
             <img src={logo} alt="Scoot Logo" className="h-6 md:h-8 w-auto" />
           </Link>
-
-          {/* დესკტოპ ნავიგაცია */}
           <div className="hidden md:flex items-center gap-8">
             <nav className="flex items-center gap-8 font-['Space_Mono'] font-bold text-[15px] text-[#939CAD]">
               <Link to="/about" className="hover:text-[#FCB72B] transition-colors">About</Link>
@@ -55,12 +52,10 @@ export default function App() {
               Get Scootin
             </button>
           </div>
-          
-          {/* ბალანსისთვის მობაილზე */}
+        
           <div className="md:hidden w-6"></div>
         </header>
 
-        {/* მობილური მენიუს Overlay */}
         <AnimatePresence>
           {isMenuOpen && (
             <motion.div 
@@ -75,7 +70,6 @@ export default function App() {
           )}
         </AnimatePresence>
 
-        {/* === ROUTES === */}
         <div className="grow">
           <Routes>
             <Route path="/" element={<Home />} />
@@ -85,7 +79,6 @@ export default function App() {
           </Routes>
         </div>
 
-        {/* === FOOTER === */}
         <footer className="w-full bg-[#333A44] py-8 mt-auto">
           <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-41.25 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex flex-col md:flex-row items-center gap-8 md:gap-14">
