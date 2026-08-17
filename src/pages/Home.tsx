@@ -10,7 +10,7 @@ import scooterLogo from '../assets/scooterlogo.svg';
 import rideLogo from '../assets/ridelogo.svg';
 import girlImg from '../assets/girl.svg';
 import arrowFromRtoL from '../assets/arrowfromRtoL.svg';
-import maskCircle from '../assets/mask.svg';
+import maskCircle from '../assets/Mask.svg';
 import cityImg from '../assets/city.svg';
 import arrowLtoR from '../assets/arrowLtoR.svg';
 import mask1Circle from '../assets/Mask1.svg';
