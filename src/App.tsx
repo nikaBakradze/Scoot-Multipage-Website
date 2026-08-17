@@ -1,5 +1,6 @@
+import { useState } from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 import logo from './assets/scoot.svg';
 import facebookIcon from './assets/facebook-logo.svg';
@@ -13,59 +14,66 @@ import Location from './pages/Location';
 import Careers from './pages/Careers';
 
 export default function App() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
   return (
     <Router>
-      <div className="min-h-screen bg-white font-['Lexend_Deca'] overflow-x-hidden flex flex-col justify-between">
-        <header className="flex items-center justify-between px-6 md:px-10 lg:px-24 py-6 md:py-8 max-w-360 mx-auto bg-white w-full">
-          <div className="flex items-center gap-8 md:gap-14">
-            <Link to="/">
-              <motion.img 
-                src={logo} 
-                alt="Scoot Logo" 
-                className="h-6 md:h-8 w-auto" 
-                whileHover={{ scale: 1.05 }} 
-                whileTap={{ scale: 0.95 }} 
-              />
-            </Link>
-
-            <nav className="hidden md:flex items-center gap-8 font-['Space_Mono'] font-bold text-[15px] leading-6.25">
-              <Link to="/about">
-                <motion.span 
-                  whileHover={{ scale: 1.05, color: '#FCB72B' }}
-                  className="text-[#939CAD] transition-colors block cursor-pointer"
-                >
-                  About
-                </motion.span>
-              </Link>
-
-              <Link to="/location">
-                <motion.span 
-                  whileHover={{ scale: 1.05, color: '#FCB72B' }}
-                  className="text-[#939CAD] transition-colors block cursor-pointer"
-                >
-                  Location
-                </motion.span>
-              </Link>
-
-              <Link to="/careers">
-                <motion.span 
-                  whileHover={{ scale: 1.05, color: '#FCB72B' }}
-                  className="text-[#939CAD] transition-colors block cursor-pointer"
-                >
-                  Careers
-                </motion.span>
-              </Link>
-            </nav>
-          </div>
-
-          <motion.button 
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="hidden sm:block font-['Space_Mono'] font-bold text-[15px] leading-6.25 text-center bg-[#FCB72B] hover:bg-transparent text-white hover:text-[#FCB72B] border-2 border-transparent hover:border-[#FCB72B] px-8 md:px-10 py-3.5 transition-all cursor-pointer"
+      <div className="min-h-screen bg-white font-['Lexend_Deca'] overflow-x-hidden flex flex-col">
+        
+        {/* === HEADER === */}
+        <header className="relative flex items-center justify-between px-6 py-6 md:px-10 lg:px-24 max-w-360 mx-auto bg-white w-full">
+          
+          {/* მობილური ჰამბურგერ მენიუს ღილაკი */}
+          <button 
+            onClick={() => setIsMenuOpen(!isMenuOpen)} 
+            className="md:hidden w-6 h-6 flex flex-col justify-center gap-[5px] cursor-pointer z-[60]"
           >
-            Get Scootin
-          </motion.button>
+            {isMenuOpen ? (
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M1 1L17 17M1 17L17 1" stroke="#FCB72B" strokeWidth="3" strokeLinecap="round"/></svg>
+            ) : (
+              <>
+                <span className="block h-1 w-full bg-[#FCB72B] rounded-full"></span>
+                <span className="block h-1 w-full bg-[#FCB72B] rounded-full"></span>
+                <span className="block h-1 w-full bg-[#FCB72B] rounded-full"></span>
+              </>
+            )}
+          </button>
+
+          {/* ლოგო (ცენტრში მობაილზე) */}
+          <Link to="/" className="absolute left-1/2 -translate-x-1/2 md:static md:translate-x-0">
+            <img src={logo} alt="Scoot Logo" className="h-6 md:h-8 w-auto" />
+          </Link>
+
+          {/* დესკტოპ ნავიგაცია */}
+          <div className="hidden md:flex items-center gap-8">
+            <nav className="flex items-center gap-8 font-['Space_Mono'] font-bold text-[15px] text-[#939CAD]">
+              <Link to="/about" className="hover:text-[#FCB72B] transition-colors">About</Link>
+              <Link to="/location" className="hover:text-[#FCB72B] transition-colors">Location</Link>
+              <Link to="/careers" className="hover:text-[#FCB72B] transition-colors">Careers</Link>
+            </nav>
+            <button className="font-['Space_Mono'] font-bold text-[15px] bg-[#FCB72B] text-white px-8 py-3.5 hover:bg-transparent hover:text-[#FCB72B] border-2 border-[#FCB72B] transition-all">
+              Get Scootin
+            </button>
+          </div>
+          
+          {/* ბალანსისთვის მობაილზე */}
+          <div className="md:hidden w-6"></div>
         </header>
+
+        {/* მობილური მენიუს Overlay */}
+        <AnimatePresence>
+          {isMenuOpen && (
+            <motion.div 
+              initial={{ x: '-100%' }} animate={{ x: 0 }} exit={{ x: '-100%' }}
+              className="fixed inset-0 top-[72px] z-50 bg-[#333A44] p-6 flex flex-col gap-6 md:hidden"
+            >
+              <Link to="/about" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-bold font-['Space_Mono']">About</Link>
+              <Link to="/location" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-bold font-['Space_Mono']">Location</Link>
+              <Link to="/careers" onClick={() => setIsMenuOpen(false)} className="text-white text-lg font-bold font-['Space_Mono']">Careers</Link>
+              <button className="mt-auto w-full bg-[#FCB72B] text-white py-4 font-bold font-['Space_Mono']">Get Scootin</button>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
         {/* === ROUTES === */}
         <div className="grow">
@@ -78,59 +86,22 @@ export default function App() {
         </div>
 
         {/* === FOOTER === */}
-        <footer className="w-full bg-[#333A44] py-8 md:py-8.75 mt-auto">
-          <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-41.25 flex flex-col md:flex-row items-center justify-between gap-8 md:gap-0">
+        <footer className="w-full bg-[#333A44] py-8 mt-auto">
+          <div className="max-w-360 mx-auto px-6 md:px-10 lg:px-41.25 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex flex-col md:flex-row items-center gap-8 md:gap-14">
               <Link to="/">
-                <motion.img 
-                  src={footerLogo} 
-                  alt="Scoot Logo" 
-                  className="h-6 md:h-7 w-auto" 
-                  whileHover={{ scale: 1.05 }} 
-                  whileTap={{ scale: 0.95 }} 
-                />
+                <img src={footerLogo} alt="Scoot Logo" className="h-6 md:h-7 w-auto" />
               </Link>
-
-              <nav className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 font-['Space_Mono'] font-bold text-[15px] leading-6.25">
-                <Link to="/about">
-                  <motion.span 
-                    whileHover={{ scale: 1.05, color: '#FCB72B' }}
-                    className="text-[#939CAD] transition-colors block cursor-pointer"
-                  >
-                    About
-                  </motion.span>
-                </Link>
-
-                <Link to="/location">
-                  <motion.span 
-                    whileHover={{ scale: 1.05, color: '#FCB72B' }}
-                    className="text-[#939CAD] transition-colors block cursor-pointer"
-                  >
-                    Location
-                  </motion.span>
-                </Link>
-
-                <Link to="/careers">
-                  <motion.span 
-                    whileHover={{ scale: 1.05, color: '#FCB72B' }}
-                    className="text-[#939CAD] transition-colors block cursor-pointer"
-                  >
-                    Careers
-                  </motion.span>
-                </Link>
+              <nav className="flex flex-col sm:flex-row items-center gap-4 sm:gap-8 font-['Space_Mono'] font-bold text-[15px] text-[#939CAD]">
+                <Link to="/about" className="hover:text-[#FCB72B] transition-colors">About</Link>
+                <Link to="/location" className="hover:text-[#FCB72B] transition-colors">Location</Link>
+                <Link to="/careers" className="hover:text-[#FCB72B] transition-colors">Careers</Link>
               </nav>
             </div>
-
             <div className="flex items-center gap-6">
-              <motion.a href="#" aria-label="Facebook" whileHover={{ scale: 1.2, rotate: 5 }} whileTap={{ scale: 0.9 }}>
-                <img src={facebookIcon} alt="Facebook" className="w-6 h-6 object-contain" />
-              </motion.a>
-              <motion.a href="#" aria-label="Twitter" whileHover={{ scale: 1.2, rotate: -5 }} whileTap={{ scale: 0.9 }}>
-                <img src={twitterIcon} alt="Twitter" className="w-6 h-6 object-contain" />
-              </motion.a>
-              <motion.a href="#" aria-label="Instagram" whileHover={{ scale: 1.2, rotate: 5 }} whileTap={{ scale: 0.9 }}>
-                <img src={instagramIcon} alt="Instagram" className="w-6 h-6 object-contain" />
-              </motion.a>
+              <img src={facebookIcon} alt="Facebook" className="w-6 h-6 cursor-pointer hover:opacity-80" />
+              <img src={twitterIcon} alt="Twitter" className="w-6 h-6 cursor-pointer hover:opacity-80" />
+              <img src={instagramIcon} alt="Instagram" className="w-6 h-6 cursor-pointer hover:opacity-80" />
             </div>
           </div>
         </footer>

@@ -1,6 +1,6 @@
 import { motion } from 'framer-motion';
 
-import heroBg from '../assets/manWithScooter.png';
+import heroBg from '../assets/manwithscooter.png';
 import lineSvg from '../assets/line.svg';
 import arrowSvg from '../assets/arrow.svg';
 import circlesSvg from '../assets/3circle.svg';
