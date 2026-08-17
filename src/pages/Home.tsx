@@ -14,7 +14,7 @@ import maskCircle from '../assets/Mask.svg';
 import cityImg from '../assets/city.svg';
 import arrowLtoR from '../assets/arrowLtoR.svg';
 import mask1Circle from '../assets/Mask1.svg';
-import bitmapImg from '../assets/bitmap.svg';
+import bitmapImg from '../assets/Bitmap.svg';
 import arrowRtoL from '../assets/arrow-RtoL.svg';
 import mask2Circle from '../assets/mask2.svg';
 import appStoreImg from '../assets/appstore.svg';
